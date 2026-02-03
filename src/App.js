@@ -7,38 +7,41 @@ function App() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    if (!city) {
-      setError("Please enter a city name");
-      return;
-    }
+ const handleSearch = () => {
+  if (!city) {
+    setError("Please enter a city name");
+    return;
+  }
 
-    setLoading(true);      
-    setError("");
-    setWeather(null);
+  setLoading(true);
+  setError("");
+  setWeather(null);
 
-    fetch(
-      `https://api.weatherapi.com/v1/current.json?key=c43d778a3c174e2d81c131723260302&q=${city}`
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("City not found");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setWeather(data);
-        setError("");
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Unable to fetch weather data");
-        alert("Failed to fetch weather data");
-      })
-      .finally(() => {
-        setLoading(false);  
-      });
-  };
+  fetch(
+    `https://api.weatherapi.com/v1/current.json?key=c43d778a3c174e2d81c131723260302&q=${city}`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("City not found");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setWeather(data);
+    })
+    .catch((err) => {
+      console.error(err);
+      setError("Unable to fetch weather data");
+      alert("Failed to fetch weather data");
+    })
+    .finally(() => {
+      
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    });
+};
+
 
   return (
     <div>
