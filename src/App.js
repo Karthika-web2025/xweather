@@ -52,7 +52,7 @@ function App() {
       />
       <button onClick={handleSearch} class="btn btn-success">Search</button>
 
-       {loading && <p>Loading data…</p>}
+       {loading && <p>Loading data...</p>}
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
